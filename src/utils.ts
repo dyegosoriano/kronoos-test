@@ -79,3 +79,13 @@ export const validateCPF = (raw: string) => {
 
   return true
 }
+
+export const formatData = (date: string) => {
+  const data = new Date()
+
+  const month = String(data.getMonth() + 1).padStart(2, '0')
+  const day = String(data.getDate()).padStart(2, '0')
+  const year = data.getFullYear()
+
+  return year + month + day
+}

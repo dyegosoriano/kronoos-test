@@ -17,6 +17,9 @@ parser
     const vlTotal = utils.formatCurrency(+line[8])
     const vlMora = utils.formatCurrency(+line[19])
 
+    const dtContrato = utils.formatData(line[6])
+    const dtVctPre = utils.formatData(line[17])
+
     const nrCpfCnpj = line[4]
     const valid_document = utils.validateCPF(nrCpfCnpj) || utils.validateCNPJ(nrCpfCnpj)
 
@@ -26,9 +29,12 @@ parser
     const installment_value = +(total_value / installments).toFixed(2)
     const valid_installment = installment_value === +line[18]
 
+    // implementar lógica para salvar no banco de dados ou em um arquivo JSON
     console.log({
       valid_installment,
       valid_document,
+      dtContrato,
+      dtVctPre,
       vlPresta,
       vlTotal,
       vlMora
