@@ -13,13 +13,25 @@ stream.pipe(parser)
 
 parser
   .on('data', async line => {
-    const vlPresta = utils.formatCurrency(line[18])
-    const vlTotal = utils.formatCurrency(line[8])
-    const vlMora = utils.formatCurrency(line[19])
+    const vlPresta = utils.formatCurrency(+line[18])
+    const vlTotal = utils.formatCurrency(+line[8])
+    const vlMora = utils.formatCurrency(+line[19])
+
     const nrCpfCnpj = line[4]
+    const valid_document = utils.validateCPF(nrCpfCnpj) || utils.validateCNPJ(nrCpfCnpj)
 
-    const isValidDocument = utils.validateCPF(nrCpfCnpj) || utils.validateCNPJ(nrCpfCnpj)
+    const installments = +line[7]
+    const total_value = +line[8]
 
-    console.log({ nrCpfCnpj, vlTotal, vlPresta, vlMora, isValidDocument })
+    const installment_value = +(total_value / installments).toFixed(2)
+    const valid_installment = installment_value === +line[18]
+
+    console.log({
+      valid_installment,
+      valid_document,
+      vlPresta,
+      vlTotal,
+      vlMora
+    })
   })
   .on('end', () => console.log('Finish!'))
