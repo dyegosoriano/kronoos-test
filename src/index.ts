@@ -2,7 +2,7 @@ import filesystem from 'node:fs'
 import { parse } from 'csv-parse'
 import path from 'node:path'
 
-import { formatCurrency } from 'utils'
+import * as utils from 'utils'
 
 const directory = path.resolve(__dirname, '..', 'data.csv')
 
@@ -13,10 +13,13 @@ stream.pipe(parser)
 
 parser
   .on('data', async line => {
-    const vlPresta = formatCurrency(line[18])
-    const vlTotal = formatCurrency(line[8])
-    const vlMora = formatCurrency(line[19])
+    const vlPresta = utils.formatCurrency(line[18])
+    const vlTotal = utils.formatCurrency(line[8])
+    const vlMora = utils.formatCurrency(line[19])
+    const nrCpfCnpj = line[4]
 
-    console.log({ vlTotal, vlPresta, vlMora })
+    const isValidDocument = utils.validateCPF(nrCpfCnpj) || utils.validateCNPJ(nrCpfCnpj)
+
+    console.log({ nrCpfCnpj, vlTotal, vlPresta, vlMora, isValidDocument })
   })
   .on('end', () => console.log('Finish!'))
