@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "sourceMap": true,
+    "lib": ["esnext"],
+    "target": "ES2021",
+    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "module": "commonjs",
     "baseUrl": "./src",
     "outDir": "./dist",
-    "target": "es5"
-  }
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["dist"]
 }
