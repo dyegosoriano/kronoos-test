@@ -1,0 +1,21 @@
+{
+  "name": "kronoos-test",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "git@github.com:dyegosoriano/kronoos-test.git",
+  "author": "Dyego Soriano <4140145+dyegosoriano@users.noreply.github.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "tsx watch --ignore ./node_modules src/index.ts",
+    "build": "tsup src",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
+  }
+}
